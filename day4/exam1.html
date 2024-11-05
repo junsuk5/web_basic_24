@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+      /*
+      이름을 입력 받고
+
+  이름이 입력되지 않았을때 ‘입력해주세요’ 라고 물어보고 다시 입력받고
+
+  이름이 입력 되었을때 로그에 이름을 띄우고 경고창으로 ‘누구누구님 안녕하세요.’ 를 띄워 주세요.
+
+
+      * */
+      function exam() {
+          let name = prompt("이름을 입력하세요");
+
+          if (name === null) {
+              name = prompt("입력해주세요");
+          }
+
+          alert(`${name}님 안녕하세요.`);
+      }
+  </script>
+</head>
+<body>
+<button onclick="exam()">클릭</button>
+</body>
+</html>
