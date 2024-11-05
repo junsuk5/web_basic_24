@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+/*
+      텍스트 값을 입력 받고
+      값이 없으면 “텍스트값을 입력해 주세요” 경고창을 띄우고
+      값이 있으면 가운데 크게 텍스트를 표시해 주고
+      바로 아래에 빨강/파랑/초록 글자가 쓰여진 버튼이 생긴다.
+          빨강 파랑 초록 이 쓰여진 버튼을 누르면
+“무슨무슨 색으로 변경됩니다.” 라고 경고창이 뜨면서
+      입력된 텍스트의 색이 변경되게 해봅시다.
+      */
+    function inputText() {
+        const text = prompt("텍스트를 입력해 주세요");
+
+        if (text === null) {
+            alert("텍스트값을 입력해 주세요");
+            return;
+        }
+
+        const textDiv = document.getElementById("text");
+        textDiv.innerHTML = text;
+
+        const result = document.getElementById("result");
+        result.className = "center";
+
+    }
+
+    function changeColor(color) {
+      const text = document.getElementById("text");
+      text.style.color = color;
+
+      alert(`${color}색으로 변경됩니다`);
+    }
+  </script>
+
+  <style>
+    .hidden {
+      visibility: hidden;
+    }
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<button onclick="inputText()">텍스트 입력</button>
+
+<div id="result" class="center hidden">
+  <div id="text">여기</div>
+  <div>
+    <button onclick="changeColor('red')">빨강</button>
+    <button onclick="changeColor('blue')">파랑</button>
+    <button onclick="changeColor('green')">초록</button>
+  </div>
+</div>
+</body>
+</html>
