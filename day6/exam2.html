@@ -28,6 +28,12 @@
       right: 10px;
       bottom: 100px;
     }
+
+    #score {
+      color: red;
+      font-size: 30px;
+      text-align: center;
+    }
   </style>
 
   <script>
@@ -38,6 +44,12 @@
 
       let isJumping = false;
       let isSpawning = false;
+
+      let enemySpeed = 10;
+
+      let isDie = false;
+
+      let score = 0;
 
       function jump() {
           if (isJumping === true) {
@@ -55,7 +67,7 @@
       }
 
       function moveEnemy() {
-          $(".enemy").css("right", "+=10px");
+          $(".enemy").css("right", `+=${enemySpeed}px`);
 
           checkEnemyBounds();
       }
@@ -69,16 +81,30 @@
           }
       }
 
+      function setScore(score) {
+          $("#score").text(`SCORE : ${score}`);
+      }
+
       function respawnEnemy() {
           if (isSpawning) {
               return;
           }
 
+          if (!isDie) {
+              score += 100;
+              setScore(score);
+          }
+
           isSpawning = true;
+          enemySpeed = Math.random() * 15 + 5; // 0.0 ~ 1.0
+          // 5 ~ 20
+
+          const spawnTime = Math.random() * 1000 + 500;  // 500 ~ 1500
+
           setTimeout(() => {
               $(".enemy").css("right", "-100px");
               isSpawning = false;
-          }, 1000);
+          }, spawnTime);
       }
 
       function checkGameOver() {
@@ -114,7 +140,8 @@
           moveEnemy();
 
           if (checkGameOver()) {
-            return;
+              isDie = true;
+            // return;
           }
 
           requestAnimationFrame(gameLoop);
@@ -139,7 +166,11 @@
   </div>
 
   <div class="enemy" id="enemy">
-    <img src="assets/enemy.png" width="100px">
+    <img src="assets/enemy.png" width="50px">
+  </div>
+
+  <div id="score">
+    SCORE : 0
   </div>
 </div>
 </body>
